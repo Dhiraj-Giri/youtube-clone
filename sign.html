@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-image:url( "https://data2.1freewallpapers.com/download/youtube-video-hosting-logo.jpg");
+        }
+        h1{
+            color: white;
+            padding-left: 5px;
+            font-family:'Courier New', Courier, monospace ;
+        }
+        input{
+            margin: 5px;
+            outline: none;
+        }
+        #signin{
+            border: 1px solid black;
+            width: 100px;
+            height: 50px;
+            margin-top: 10px;
+            margin-left: 5px;
+            background-color:white ;
+        }
+        h2{
+            color: red;
+            margin-top: 10px;
+            text-align: center;
+        }
+        a{
+            text-decoration: none;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="sign">
+        <form onsubmit="Register(event)">
+            <h1>Register</h1>
+            <input id="name" type="text" placeholder="Name"><br>
+            <input id="email" type="email" placeholder="Email"><br>
+
+            <input type="text" id="username" placeholder="Username"><br>
+            <input id="password" type="password" placeholder="Password"><br>
+
+            <input id="mobile" type="number" placeholder="Mobile"><br>
+            <input id="description" type="text" placeholder="Description"><br>
+           <input type="submit">
+        </form>  
+    </div>
+    <div id="signin">
+        <h2><a href="log.html">Sign In</a></h2>
+    </div>
+</body>
+</html>
+<script>
+    async function Register(eve){
+    try{
+        eve.preventDefault()
+        console.log("dfsg")
+        var registerData ={
+            name : document.querySelector("#name").value,
+            email : document.querySelector("#email").value,
+            username : document.querySelector("#username").value,
+            password : document.querySelector("#password").value,
+            mobile : document.querySelector("#mobile").value,
+            description : document.querySelector("#description").value,
+
+        }  
+    }
+    catch(err){
+    console.log('err:', err)
+    }
+    registerData = JSON.stringify(registerData)
+    console.log('registerData:', registerData)
+
+    let reg_api = `https://masai-api-mocker.herokuapp.com/auth/register`
+    let response = await fetch (reg_api,{
+        method : "POST",
+
+        body : registerData,
+
+        headers : {
+            "Content-Type" : "application/json",
+        },
+
+    })
+
+    let data = await response.json()
+    console.log('data:', data)
+}
+</script>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/e3cc9ecf17.js" crossorigin="anonymous"></script>
+    <title>Document</title>
+    <style>
+        *{
+            font-family:sans-serif ;
+        }
+        #navbar{
+            position: sticky;
+            display:flex;
+            height: 50px;
+            border-bottom:1px solid grey ;
+            background-color: white;
+            z-index: 1000;
+        }
+        #lines{
+            padding: 14px;
+            font-size: xx-large;
+        }
+        #logo{
+            display: flex;
+            width: 15%;
+            padding: 8px;
+            font-size: 45px;
+            color: red;
+            margin-left: 15px;
+        }
+        h5{
+            margin-top: 1px;
+            color: black;
+        }
+        #search{
+            display: flex;
+        }
+        #voice,#vid,#apps,#pro,#notify i{
+            font-size: xx-large;
+        }
+        #voice{
+            width: 4%;
+            height: 85%;
+            margin-top: 4px;
+            background-color: lightgray;
+            text-align: center;
+            border-radius: 50%;
+            margin-left: 15px;
+        }
+        #search{
+            width: 40%;
+            height: 80%;
+            margin-top: 5px;
+            margin-left: 10%;
+            border: 1px solid gray;
+        }
+        #search input{
+            width: 85%;
+            font-size: large;
+            border: 0;
+            border-right: 1px solid gray;
+        }
+        #search button{
+            width: 15%;
+            margin-left: 0;
+            font-size: x-large;
+            border: 0;
+        }
+
+        #voice i{
+            padding: 6px;
+            padding-top: 7px;
+        }
+        #icons{
+            display: flex;
+            padding: 7px;
+            width: 30%;
+            margin-left: 10%;
+            justify-content: space-between;
+        }
+        #below{
+            display: flex;
+            height: 590px;
+        }
+        #gotvid{
+            flex: 2.5;
+        }
+        #rcmnd{
+            flex: 1.5;
+            overflow-y: scroll;
+        }
+        #title{
+            text-align: center;
+        }
+        #v{
+            width: 95%;
+            height: 70%;
+            margin: 2.5%;
+        }
+        iframe{
+            border: 0;
+        }
+        #rcmnd div{
+            height: 100px;
+            width: 100%;
+            display: flex;
+            margin-bottom: 2px;
+            border-bottom: 1px solid black;
+            justify-content: space-between;
+        }
+        #img{
+            height: 100%;
+            width:55%
+        }
+        #para{
+            width:40%;
+            /* margin: 0;
+            margin-left: 5px; */
+        }
+        #para p{
+            margin: 3px;
+            margin-left: 15px;
+            font-size: small;
+        }
+        #heija{
+            height: 100%;
+            width: 100%;
+        }
+        #name{
+            width: 95%;
+            height: 100px;
+            margin: 2.5%;
+            margin-top: -20px;
+        }
+        #name h2{
+            font-weight: normal;
+            padding-left: 15px;
+            margin-top: 2px;
+            font-size: 20px;
+            padding-right: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div id="navbar">
+        <div id="lines">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div id="logo">
+            <i class="fab fa-youtube"></i>
+            <h5>YouTube</h5>
+        </div>
+        <div id="search">
+            <input type="text" placeholder="Search Here" id="vid">
+            <button onclick="searchVideo()">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+        <div id="voice">
+            <i class="fas fa-microphone"></i>
+        </div>
+        <div id="icons">
+            <div id="vid">
+                <i class="fas fa-video"></i>
+            </div>
+            <div id="apps">
+                <i class="fas fa-th"></i>
+            </div>
+            <div id="notify">
+                <i class="far fa-bell"></i>
+            </div>
+            <div id="pro">
+                <i class="far fa-user"></i>
+            </div>
+        </div> 
+    </div>
+    <div id="below">
+        <div id="gotvid">
+            <div id="v"></div>
+            <div id="name"></div>
+        </div>
+        <div id="rcmnd">
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    let data = JSON.parse(localStorage.getItem("clicked_video"))
+    console.log("data:",data)
+    let videoId = data.videoId
+    let items = data.items
+    let name = data.snippet.title
+
+    let h2 = document.createElement("h2")
+    h2.innerText = name
+
+    document.getElementById("name").append(h2)
+   
+    let div= document.getElementById("v")
+
+    let iframe = document.createElement("iframe")
+    iframe.src = `https://www.youtube.com/embed/${videoId}`
+    iframe.width = "100%"
+    iframe.height = "100%"
+    iframe.setAttribute("allowfullscreen","true")
+    div.append(iframe)
+
+    const apndVid = function(items) {
+        items.forEach(({snippet}) => {
+            let block = document.createElement("div")
+            let image = document.createElement("div")
+            let para = document.createElement("div")
+            para.setAttribute("id","para")
+            image.setAttribute("id","img")
+            var title = document.createElement("p")
+            title.innerText = snippet.title
+            para.append(title)
+            var thumbnail = document.createElement("img")
+            thumbnail.setAttribute("id","heija")
+            thumbnail.src = snippet.thumbnails.medium.url
+            image.append(thumbnail)
+            block.append(image,para)
+            document.getElementById("rcmnd").append(block)
+        })
+    }
+    apndVid(items)
+</script>
