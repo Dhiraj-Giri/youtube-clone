@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/e3cc9ecf17.js" crossorigin="anonymous"></script>
-    <title>Document</title>
+    <title>Youtube</title>
     <style>
         *{
             font-family:sans-serif ;
@@ -60,6 +60,7 @@
             width: 85%;
             font-size: large;
             border: 0;
+            outline: 0;
             border-right: 1px solid gray;
         }
         #search button{
@@ -148,7 +149,7 @@
         <div id="lines">
             <i class="fas fa-bars"></i>
         </div>
-        <div id="logo">
+        <div id="logo" onclick="home()">
             <i class="fab fa-youtube"></i>
             <h5>YouTube</h5>
         </div>
@@ -187,6 +188,11 @@
 </body>
 </html>
 <script>
+   function home(){
+       window.location.href = "index.html"
+   }
+
+
     let data = JSON.parse(localStorage.getItem("clicked_video"))
     console.log("data:",data)
     let videoId = data.videoId
