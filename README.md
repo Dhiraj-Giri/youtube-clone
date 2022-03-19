@@ -8,7 +8,7 @@ It is a simple clone of the video sharing website "YouTube"  created with some H
 	
 <h1>Run locally<h1>
 <h3>Clone the project<h3>
-<h5>https://github.com/RajarsiMukherjee/youtube-clone<h5>
+<h5>https://github.com/Dhiraj-Giri/youtube-clone<h5>
  
 <h3>View in Browser<h3>
  
